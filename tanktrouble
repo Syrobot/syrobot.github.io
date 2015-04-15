@@ -1,0 +1,15 @@
+
+<!DOCTYPE>
+<html lang="en">
+<head>
+ <title>TankTrouble</title>
+</head>
+<body bgColor="#ffffff">
+<font face="Tahoma,Arial" size="3">
+<h1>Pictures of Me</h1>
+<p>
+ <a href="index.html">Front Page</a>; <a href="tanktrouble.html">TankTrouble</a>
+</p>
+</font>
+</body>
+</html>
