@@ -54,6 +54,121 @@ $ git checkout gh-pages
 
 
         </article>
+        <article><div class="box mobile">
+	<div class="header text normal">Got Feedback?</div>
+	<div class="content text small gray" id="feedback" style="position: relative; left: 0px; top: 0px; cursor: pointer;">
+		<div id="feedbacktextclosed" style="height: 100%;">
+			Got ideas?<br/>
+			Found Bugs?<br/>
+			Urge to praise us to the skies?<br/>
+			Then give us your feedback
+			<img src="images/envelope.jpg" height="29px" width="72px" alt=""/>
+		</div>
+		<div id="feedbacktextopen" style="display: none; height: 100%;">
+			<textarea id="feedbackcomment" rows="10" cols="1" style="overflow: hidden; resize: none; width: 96px;"></textarea><br/>
+			<input type="button" value="Submit" onclick="this.disabled = true; sendFeedback(); return false;"/>
+		</div>
+		<div id="feedbacktextsent" style="display: none; height: 100%;">
+			Thank you for your comments!
+		</div>
+	</div>
+	<div class="bottom"><!-- Tiny empty divs in IE6 have the wrong height without this comment --></div>
+</div>
+
+<script type="text/javascript">
+	<!--
+	var testFX = new Fx.Style(document.getElementById('feedback'), 'height', {onComplete: finishedAnimatingFeedback, duration: 500, transition: Fx.Transitions.Quad.easeInOut});
+	var testFX2 = new Fx.Style(document.getElementById('feedback'), 'width', {duration: 600, transition: Fx.Transitions.Sine.easeInOut});
+	var testFX3 = new Fx.Style(document.getElementById('feedback'), 'left', {duration: 600, transition: Fx.Transitions.Sine.easeInOut});    
+	var testFX4 = new Fx.Style(document.getElementById('feedbacktextclosed'), 'opacity', {duration: 200, transition: Fx.Transitions.linear});
+	var testFX5 = new Fx.Style(document.getElementById('feedbacktextopen'), 'opacity', {onComplete: finishedFadingOpenText, duration: 200, transition: Fx.Transitions.linear});
+
+	var feedbackclosedheight = document.getElementById('feedbacktextclosed').clientHeight;
+	document.getElementById('feedbacktextopen').style.display = 'block';
+	var feedbackopenheight = document.getElementById('feedbacktextopen').clientHeight;
+	document.getElementById('feedbacktextopen').style.display = 'none';
+	document.getElementById('feedbacktextsent').style.display = 'block';
+	var feedbacksentheight = document.getElementById('feedbacktextsent').clientHeight;
+	document.getElementById('feedbacktextsent').style.display = 'none';
+
+	var feedbackOpened = false;
+
+	function finishedAnimatingFeedback()
+	{
+		feedbackOpened = !feedbackOpened;
+
+		if (feedbackOpened)
+		{
+			document.getElementById('feedbacktextclosed').style.display = 'none';
+			document.getElementById('feedbacktextopen').style.display = 'block';
+			testFX5.start(0, 1);
+		}
+		else
+		{
+			document.getElementById('feedbacktextclosed').style.display = 'block';
+			testFX4.start(0, 1);
+		}
+	}
+
+	function finishedFadingOpenText()
+	{
+		if (feedbackOpened && document.getElementById('feedbacktextopen').style.opacity == 0)
+		{
+			testFX.start(feedbacksentheight);
+			document.getElementById('feedbacktextopen').style.display = 'none';
+		}
+		else if (feedbackOpened && document.getElementById('feedbacktextopen').style.opacity == 1)
+		{
+			document.getElementById('feedbackcomment').focus();        
+		}
+	}
+
+	function openFeedback()
+	{
+		if (feedbackOpened)
+			return;
+
+		testFX.start(feedbackclosedheight, feedbackopenheight);
+		testFX4.stop();
+		testFX4.start(0);
+		testFX5.set(0);
+
+		document.getElementById('feedback').onclick = function() { return false; }
+		document.getElementById('feedback').style.cursor = 'default';
+	}
+
+	function closeFeedback()
+	{
+		if (!feedbackOpened)
+			return;
+
+		testFX4.set(0);
+		testFX5.stop();
+		testFX5.start(0);            
+	}
+
+	document.getElementById('feedback').onclick = function()
+	{
+		openFeedback();        
+	}
+
+	function sendFeedback_cb(r)
+	{
+		//Called with the server generated response as argument. Not used for now..
+	}
+
+	function sendFeedback()
+	{
+		closeFeedback();    
+		document.getElementById('feedbacktextclosed').innerHTML = document.getElementById('feedbacktextsent').innerHTML;
+		x_feedback(document.getElementById('feedbackcomment').value, sendFeedback_cb);
+	}
+	//  -->    
+</script>			</div>
+			
+			
+
+		</div></article>
       </div>
     </div>
     <footer>
